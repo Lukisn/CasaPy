@@ -58,8 +58,6 @@ def vote(request, question_id):
             },
         )
     else:
-        # TODO: test this really works:
-        # https://docs.djangoproject.com/en/4.1/ref/models/expressions/#avoiding-race-conditions-using-f
         selected_choice.votes = F("votes") + 1
         selected_choice.save()
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
