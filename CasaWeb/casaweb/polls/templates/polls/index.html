@@ -1,8 +1,8 @@
-{% extends "home/main.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 Polls Index
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
 <h1 class="is-size-2">Polls Index</h1>
@@ -15,4 +15,4 @@ Polls Index
 {% else %}
 <p>No polls are available.</p>
 {% endif %}
-{% endblock %}
+{% endblock content %}

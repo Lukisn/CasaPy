@@ -1,8 +1,8 @@
-{% extends "home/main.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 Poll Results
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
 <h1 class="is-size-2">PollsResults</h1>
@@ -16,4 +16,4 @@ Poll Results
   {% endfor %}
 </ul>
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-{% endblock %}
+{% endblock content %}
