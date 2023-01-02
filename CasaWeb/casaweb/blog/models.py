@@ -16,7 +16,7 @@ class Entry(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name="comments")
     title = models.CharField(max_length=255, null=False)
     body = models.TextField(null=False)
     created = models.DateTimeField(auto_now_add=True)

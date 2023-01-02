@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Blog Entry - {{ entry.title }}
+{% endblock title %}
+
+{% block content %}
+<div class="block">
+  <a href="{% url 'blog:index' %}">Back to Blog Index</a>
+</div>
+<div class="block">
+  <h1 class="title is-2">{{ entry.title }}</h1>
+  <h2 class="subtitle is-4">{{ entry.author.username }}</h2>
+  <div class="block">
+    <p>{{ entry.body }}</p>
+  </div>
+  <p><small>created {{ entry.created }}</small></p>
+  <p><small>last updated {{ entry.last_updated }}</small></p>
+</div>
+<hr>
+<div class="block">
+  <h1 class="title is-2">Comments</h1>
+  {% for comment in comments %}
+  <h2 class="title is-4">{{ comment.title }}</h2>
+  <h3 class="subtitle is-6">by {{ comment.author }}</h3>
+  <p>{{ comment.body }}</p>
+  <p><small>created{{ comment.created }}</small></p>
+  {% endfor %}
+</div>
+<div class="block">
+  <!-- TODO: Implement Comment Creation Form -->
+  <p>Comment Creation Form...</p>
+</div>
+{% endblock content %}
