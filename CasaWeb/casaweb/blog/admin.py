@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Tag, Entry, Comment
+
+
+admin.site.register(Entry, Comment, Tag)
