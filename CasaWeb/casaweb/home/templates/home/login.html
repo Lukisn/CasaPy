@@ -6,7 +6,25 @@ Log In
 
 {% block content %}
 <h1 class="is-size-2">Log In</h1>
-<!-- TODO: implement login form and user authentication -->
-<p>This is the login page.</p>
-<p><small>Not registered yet? <a href="{% url 'home:signup' %}">Sign up</a> here.</small></p>
+<form action="" method="POST">
+  {% csrf_token %}
+  <div class="field">
+    <label class="label" for="username">Username</label>
+    <div class="control">
+      <input class="input" type="text" id="username" name="username" required/>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label" for="password">Password</label>
+    <div class="control">
+      <input class="input" type="password" id="password" name="password" required/>
+    </div>
+  </div>
+  <div class="field is-grouped is-grouped-right">
+    <div class="control">
+      <button class="button is-primary" type="submit">Login</button>
+    </div>
+  </div>
+</form>
+<p class="has-text-centered"><small>Not registered yet? <a href="{% url 'home:signup' %}">Sign up</a> here.</small></p>
 {% endblock content %}
