@@ -10,6 +10,16 @@
 {% include "navbar.html" %}
 <section class="section">
   <div class="container">
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="notification is-light is-{{ message.tags.split.0 }}">
+        <button class="delete"></button>
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
     {% block content %}Content{% endblock content %}
   </div>
 </section>
@@ -24,7 +34,7 @@
   </div>
 </footer>
 </body>
-<!-- TODO: extract js into static js file(s)
+<!-- TODO: extract js into static js file(s) -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
   // Get all "navbar-burger" elements
@@ -38,6 +48,16 @@
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
       el.classList.toggle('is-active');
       $target.classList.toggle('is-active');
+    });
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    const $notification = $delete.parentNode;
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
     });
   });
 });
