@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+Report Issue
+{% endblock title %}
+
+{% block content %}
+<h1 class="is-size-2">Report Issue</h1>
+<p>This is the issue report page.</p>
+<!-- TODO: Style with bulma classes -->
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock content %}

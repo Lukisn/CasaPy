@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.shortcuts import redirect, render
+
+from .forms import ContactForm, IssueForm
 
 
 def home_view(request):
@@ -48,3 +50,45 @@ def signup_view(request):
                 request, messages.ERROR, "Passwords must match", extra_tags="danger"
             )
     return render(request, "home/signup.html")
+
+
+def about_view(request):
+    return render(request, "home/about.html")
+
+
+def contact_view(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # TODO: process contact form: save to db and/or send email
+            messages.add_message(
+                request, messages.SUCCESS, "Thank you for getting in touch."
+            )
+            return redirect("home:index")
+        else:
+            messages.add_message(
+                request, messages.ERROR, "Invalid Form", extra_tags="danger"
+            )
+    else:
+        form = ContactForm()
+    context = {"form": form}
+    return render(request, "home/contact.html", context)
+
+
+def issue_view(request):
+    if request.method == "POST":
+        form = IssueForm(request.POST)
+        if form.is_valid():
+            # TODO: process issue report form
+            messages.add_message(
+                request, messages.SUCCESS, "Thank you for reporting the issue."
+            )
+            return redirect("home:index")
+        else:
+            messages.add_message(
+                request, messages.ERROR, "Invalid Form", extra_tags="danger"
+            )
+    else:
+        form = IssueForm()
+    context = {"form": form}
+    return render(request, "home/issue.html", context)
