@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,61 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Title{% endblock title %}</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="{% static 'js/burger.js'  %}" defer></script>
+  <script src="{% static 'js/notification.js' %}" defer></script>
 </head>
 <body>
-{% include "navbar.html" %}
-<section class="section">
-  <div class="container">
-    {% if messages %}
-    <div class="messages">
-      {% for message in messages %}
-      <div class="notification is-light is-{{ message.tags.split.0 }}">
-        <button class="delete"></button>
-        {{ message }}
+  {% include "navbar.html" %}
+  <section class="section">
+    <div class="container">
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+        <div class="notification is-light is-{{ message.tags.split.0 }}">
+          <button class="delete"></button>
+          {{ message }}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
+      {% endif %}
+      {% block content %}Content{% endblock content %}
     </div>
-    {% endif %}
-    {% block content %}Content{% endblock content %}
-  </div>
-</section>
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
-      <strong>CasaWeb</strong> by <a href="#">Lukas Reimer</a>. The source code is
-      licensed
-      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-    </p>
-  </div>
-</footer>
+  </section>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>Copyright &copy; {% now "Y" %} Lukas Reimer</p>
+    </div>
+  </footer>
 </body>
-<!-- TODO: extract js into static js file(s) -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-  // Add a click event on each of them
-  $navbarBurgers.forEach( el => {
-    el.addEventListener('click', () => {
-      // Get the target from the "data-target" attribute
-      const target = el.dataset.target;
-      const $target = document.getElementById(target);
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      el.classList.toggle('is-active');
-      $target.classList.toggle('is-active');
-    });
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-    const $notification = $delete.parentNode;
-    $delete.addEventListener('click', () => {
-      $notification.parentNode.removeChild($notification);
-    });
-  });
-});
-</script>
 </html>
