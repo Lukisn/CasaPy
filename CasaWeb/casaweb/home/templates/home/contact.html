@@ -1,16 +1,20 @@
 {% extends "base.html" %}
-
 {% block title %}
-Contact
+  Contact
 {% endblock title %}
-
 {% block content %}
-<h1 class="is-size-2">Contact</h1>
-<p>This is the contact page.</p>
-<!-- TODO: Style with bulma classes -->
-<form action="" method="POST">
+  <h1 class="is-size-2">Contact</h1>
+  <p>Please use the form below to get in touch.</p>
+  <form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+    <p class="help">{{ form.non_field_errors }}</p>
+    {% for field in form %}
+      <div class="field">
+        <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="control">{{ field }}</div>
+        {% for error in field.errors %}<p class="help is-danger">{{ error  }}</p>{% endfor %}
+      </div>
+    {% endfor %}
+    <input class="button is-primary" type="submit" value="Submit" />
+  </form>
 {% endblock content %}

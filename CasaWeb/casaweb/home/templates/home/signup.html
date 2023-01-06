@@ -1,36 +1,40 @@
 {% extends "base.html" %}
-
 {% block title %}
-Sign Up
+  Sign Up
 {% endblock title %}
-
 {% block content %}
-<h1 class="is-size-2">Sign Up</h1>
-<form action="" method="POST">
-  {% csrf_token %}
-  <div class="field">
-    <label class="label" for="username">Username</label>
-    <div class="control">
-      <input class="input" type="text" id="username" name="username" required />
+  <h1 class="is-size-2">Sign Up</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="field">
+      <label class="label" for="username">Username</label>
+      <div class="control">
+        <input class="input" type="text" id="username" name="username" required />
+      </div>
     </div>
-  </div>
-  <div class="field">
-    <label class="label" for="password1">Password</label>
-    <div class="control">
-      <input class="input" type="password" id="password1" name="password1" required />
+    <div class="field">
+      <label class="label" for="password1">Password</label>
+      <div class="control">
+        <input class="input"
+               type="password"
+               id="password1"
+               name="password1"
+               required/>
+      </div>
     </div>
-  </div>
-  <div class="field">
-    <label class="label" for="password2">Confirm Password</label>
-    <div class="control">
-      <input class="input" type="password" id="password2" name="password2" required />
+    <div class="field">
+      <label class="label" for="password2">Confirm Password</label>
+      <div class="control">
+        <input class="input"
+               type="password"
+               id="password2"
+               name="password2"
+               required/>
+      </div>
     </div>
-  </div>
-  <div class="field is-grouped is-grouped-right">
-    <div class="control">
-      <button class="button is-primary" type="submit">Sign up</button>
-    </div>
-  </div>
-</form>
-<p class="has-text-centered"><small>Already signed up? <a href="{% url 'home:login' %}">Login</a> instead.</small></p>
+    <button class="button is-primary" type="submit">Sign up</button>
+  </form>
+  <p class="has-text-centered">
+    <small>Already signed up? <a href="{% url 'home:login' %}">Login</a> instead.</small>
+  </p>
 {% endblock content %}
